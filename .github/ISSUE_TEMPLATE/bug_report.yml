@@ -1,0 +1,27 @@
+name: Bug report
+about: Report a reproducible problem without sharing credentials
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Problem
+      description: Explain what happened and the expected behavior.
+    validations:
+      required: true
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Host platform
+      options: [Windows Desktop, Windows CLI/Web, Linux, macOS, Other]
+    validations:
+      required: true
+  - type: textarea
+    id: versions
+    attributes:
+      label: Versions and reproduction steps
+      description: Include Harness version, plugin version, steps and a sanitized error stack.
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: Do not upload passwords, tokens, SSH keys, credentials.json, or private server addresses.

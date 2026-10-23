@@ -1,0 +1,54 @@
+{
+  "name": "dsh-remote-workspace",
+  "version": "0.5.26-safe.1",
+  "description": "Experimental source-available remote workspaces for DeepSeek Harness (Host and Web UI)",
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/*.cjs",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE",
+    "THIRD-PARTY-NOTICES.md",
+    "third_party/licenses/*",
+    "third_party/notices/*",
+    "LICENSE.zh-CN.md",
+    "docs/WIKI.zh-CN.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "*",
+    "@deepseek-ai/dsh-tools": "*"
+  },
+  "dependencies": {
+    "@deepseek-ai/schemastery": "*",
+    "basic-ftp": "^5.3.1",
+    "ssh2": "^1.16.0",
+    "ssh2-sftp-client": "^11.0.0"
+  },
+  "engines": {
+    "node": ">=20.11",
+    "dsh": ">=0.2.0 <0.3.0"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "verify": "node scripts/build.mjs && node scripts/check.mjs && node --test tests/*.test.mjs && node scripts/verify-package.mjs && node scripts/check-licenses.mjs --source",
+    "pack": "node scripts/pack-safe.mjs",
+    "pack:ui-experimental": "node scripts/pack-ui-candidate.mjs",
+    "license:source": "node scripts/check-licenses.mjs --source",
+    "license:installed": "node scripts/check-licenses.mjs --installed"
+  },
+  "license": "SEE LICENSE IN LICENSE"
+}

@@ -1,0 +1,4 @@
+- insert:
+    - id: remote-workspace
+      name: dsh-remote-workspace
+      config: {}

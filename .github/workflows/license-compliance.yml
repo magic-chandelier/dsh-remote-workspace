@@ -1,0 +1,36 @@
+name: License compliance (release gate)
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  release:
+    types: [published]
+permissions:
+  contents: read
+jobs:
+  dependency-license-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
+      - name: Require committed pnpm lockfile
+        run: test -f pnpm-lock.yaml || { echo 'BLOCKED: commit pnpm-lock.yaml before release'; exit 1; }
+      - name: Reproducible install (no lifecycle execution)
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Check source license and packed attribution
+        run: pnpm run license:source
+      - name: Review all installed direct and transitive package licenses
+        run: pnpm run license:installed
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: installed-dependency-license-report
+          path: license-reports/dependency-license-audit.json
+          if-no-files-found: ignore

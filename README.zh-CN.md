@@ -1,0 +1,37 @@
+# DeepSeek Remote Workspace
+
+**DeepSeek Harness 远程工作区插件 · v0.5.26 · 测试版**
+
+DeepSeek Remote Workspace 集中提供 SSH/SFTP、FTP/FTPS 文件管理和经 SSH 授权的 Linux 状态查看、终端及受控操作。它通过插件托管工作区和可信项目绑定控制远程工具的使用范围，不会自动将 Harness 的本地文件或 Shell 工具转为远程执行。
+
+## 功能概览
+
+- **文件管理：** 浏览、编辑、搜索、上传和下载；支持多文件拖拽上传、分块传输、进度显示及取消请求。
+- **连接与工作区：** SSH/SFTP、FTP/FTPS 配置；仅可信绑定的会话可调用相应远程工具。
+- **远程 Linux：** SSH 终端、CPU/内存/磁盘/网络信息、进程和 systemd 服务查看，以及经过授权的管理操作。
+- **运行管理：** 凭据保护、连接审批、远程命令确认、插件停用及私有数据清理。
+
+Web UI 仍处于实验阶段。上传单文件上限 128 MiB；不支持文件夹递归拖拽或断点续传。取消操作可能无法撤回已经提交的文件或命令。
+
+## 使用范围和风险
+
+本项目采用 **[Personal Research License 1.1](LICENSE)**，属于 **Source Available（源码可查看）**，**不是 OSI 认可的开源软件**。仅允许个人在私人、隔离、非生产环境研究、评估和谨慎使用。禁止商业使用、商业环境及所有组织性使用（包括内部评估）；未经书面授权禁止再分发、公开修改版、重打包和受保护代码的衍生插件分发。详见 [许可证中文说明](LICENSE.zh-CN.md)。
+
+软件为测试版，远程文件修改、命令执行或服务控制可能造成数据丢失、服务中断或凭据泄露。仅在拥有管理授权的个人测试设备上使用，并提前备份。免责及责任限制仅在适用法律允许范围内有效。
+
+本许可不覆盖第三方软件，也不追溯撤销早期 MIT 版本的有效授权。详见 [第三方声明](THIRD-PARTY-NOTICES.md)。**本次文档及授权修订保留版本号 0.5.26；识别不同发行快照应以发布来源和校验值为准。**
+
+## 构建与说明
+
+从源码验证需要 Node.js 20.11+ 和兼容的 Harness 开发环境：
+
+```bash
+pnpm run verify
+pnpm run pack
+pnpm run pack:ui-experimental
+```
+
+- [综合 Wiki：安装、授权、文件传输、监控、生命周期和发布](docs/WIKI.zh-CN.md)
+- [安全政策](SECURITY.md) · [英文介绍](README.md)
+
+CI 必须先提交从软件包仓库解析得到的 `pnpm-lock.yaml`，然后使用 `pnpm install --frozen-lockfile --ignore-scripts` 安装。**生成锁文件或冻结安装通过，不等于完成完整的间接依赖许可证审计**；仍须执行 `pnpm run license:installed`，人工审核其报告后才能宣称完成许可证审阅。真实 Windows Desktop 验收也尚未完成。

@@ -1,0 +1,199 @@
+DeepSeek Remote Workspace Personal Research License 1.1
+
+Copyright (c) 2026 the applicable DeepSeek Remote Workspace copyright holder(s).
+All rights reserved.
+
+IMPORTANT: THIS IS A RESTRICTIVE SOURCE-AVAILABLE LICENSE, NOT AN OSI-APPROVED
+OPEN-SOURCE LICENSE. IT DOES NOT PERMIT COMMERCIAL USE, USE IN COMMERCIAL OR
+PRODUCTION ENVIRONMENTS, OR ANY ORGANIZATIONAL USE, INCLUDING INTERNAL
+EVALUATION BY COMPANIES, SCHOOLS, LABORATORIES, OR OTHER INSTITUTIONS.
+
+1. Scope and authority
+
+This license (the "License") governs DeepSeek Remote Workspace source code,
+binaries, documentation, interfaces, examples, official plugins, project-owned
+SDK material, and other content (collectively, the "Software") expressly
+provided under this License, solely to the extent the applicable copyright
+holder(s) have authority to license that content. This License does not alter
+licenses applicable to third-party material or valid licenses granted for
+earlier releases.
+
+Making source code, a GitHub repository, build scripts, executable packages,
+plugin/extension interfaces, SDK material, or examples publicly available does
+not, by itself, grant rights to publish modifications, create or distribute
+extensions or derivative products, redistribute, sublicense, host, commercialize,
+or use the Software in an organizational environment.
+
+2. Limited individual permission
+
+Subject to compliance with all terms, the applicable rights holder(s) grant
+an individual person a limited, personal, non-exclusive, non-transferable,
+non-sublicensable permission to:
+
+(a) inspect, read, and study the Software;
+(b) download and retain copies reasonably necessary for that individual's
+    independent, private, non-commercial study, education, research, security
+    assessment, and evaluation;
+(c) install and run official copies only in an isolated, non-production test
+    environment personally controlled by that individual; and
+(d) modify project-owned Software privately and solely for the purposes in
+    (b) and (c), without publishing, sharing, distributing, or using the
+    modified result for a prohibited purpose.
+
+No permission is granted for any use performed on behalf of, at the direction
+of, as part of, or for the benefit of an organization, employer, customer,
+client, research group, or other person. Permission for "education" refers
+only to independent individual learning, not school or institutional use.
+
+3. Prohibited commercial, institutional, and organized use
+
+Without separate prior written authorization from all rights holders whose
+permission is required, the following are prohibited, whether paid or unpaid:
+
+(a) commercial activity, including business operations, employment, contract
+    work, consulting, resale, advertising, monetization, paid hosting, managed
+    services, or incorporation into a commercial offering;
+(b) installation or operation in any commercial, corporate, customer-facing,
+    shared-service, production, or other organizational infrastructure;
+(c) any use by or for a company, partnership, association, non-profit,
+    government body, school, university, research laboratory, institution,
+    organized team, or coordinated project group;
+(d) internal evaluation, pilot programs, demonstrations, testing, training,
+    or research carried out by or for any organization, even if non-commercial,
+    unpaid, or limited to a private network;
+(e) managing production systems or third-party infrastructure; and
+(f) creating or offering any derivative product or hosted or managed service
+    based on the Software.
+
+Independent personal study conducted outside any organizational activity or
+environment remains subject to Section 2 and is not prohibited merely because
+an individual happens to be a student or an employee.
+
+4. Redistribution, modification, and integration
+
+No right is granted to upload, publish, mirror, share, transfer, distribute,
+resell, rent, sublicense, relicense, or make available to any third party the
+Software, its source code or binaries, or any patch, modified, repackaged,
+compatible, derivative, or unofficial edition. In particular, no right is
+granted to:
+
+(a) publish a modified fork, patch release, repackaged build, unofficial
+    download, or derivative repository;
+(b) incorporate the Software or project-owned parts of it into another
+    redistributable product, software suite, operating-system image,
+    appliance, installer, cloud offering, or service;
+(c) redistribute an official plugin or a modified official plugin; or
+(d) provide the Software to third parties through a download, distribution
+    platform, package registry, private sharing channel, or managed deployment.
+
+Only releases made by the applicable rights holder(s) or expressly authorized
+publishers are official distributions. The platform-native source viewing and
+fork functionality of GitHub or another hosting platform remains subject to
+that platform's terms and applicable law; it does not create any additional
+license under this License to exploit or distribute the Software.
+
+5. Plugin, extension, API, and SDK boundaries
+
+Publication of a Plugin API, Extension API, SDK, protocol description,
+compatibility interface, sample project, type definition, template, or official
+plugin does not grant an express or implied license to use project-owned
+Software material to create, publish, distribute, market, or commercialize
+third-party plugins, modifications to official plugins, compatible plugins,
+derivative extensions, SDK forks, or integrations.
+
+Except for private study and private modification expressly allowed by
+Section 2, no permission under this License is granted to copy, adapt, embed,
+redistribute, or use project-owned SDK code, examples, interface
+implementations, official plugin code, or other protected material for such
+third-party development or distribution. Separate prior written permission
+is required for uses outside Section 2 that depend on rights controlled by
+the applicable rights holder(s).
+
+This section does not claim ownership of independent third-party technology,
+standard protocols, unprotectable ideas, or material governed by separate
+licenses, and does not override rights that cannot lawfully be restricted,
+including any applicable statutory interoperability exceptions. It does not
+purport to prohibit wholly independent activity to which no permission from
+these rights holder(s) is legally required.
+
+6. Preservation of notices; official identity
+
+You must keep intact and accurate the copyright, licensing, origin, attribution,
+security, third-party, and official identity notices on copies or private
+modifications that you are permitted to make, except changes expressly
+required by applicable law or authorized in writing. You may not remove,
+forge, conceal, misrepresent, or circumvent such notices to suggest that a
+modified or unofficial version is official.
+
+No trademark, trade name, domain name, logo, service mark, project identity,
+or branding permission is granted. You may not impersonate the project, its
+rights holders, maintainers, official distribution channels, or endorsed
+partners, or falsely imply affiliation, certification, authorization, or
+endorsement. Accurate nominative references otherwise allowed by law remain
+unaffected.
+
+7. Third-party material and pre-existing licenses
+
+Third-party libraries, code, components, documentation, SDKs, assets, and
+other materials remain governed by their own licenses, attribution terms,
+notices, and legally required rights. This License does not relicense or
+restrict rights received directly under those third-party terms. Consult
+THIRD-PARTY-NOTICES.md and the applicable original LICENSE/NOTICE files.
+
+Nothing here retroactively revokes or changes valid rights already granted
+under MIT or other licenses to recipients of earlier releases. Each earlier
+copy remains subject to its applicable prior license. This License applies
+to later expressly licensed content only where the applicable rights holder(s)
+have the legal authority to grant these terms.
+
+8. Reservation of rights; permissions in writing
+
+All rights not expressly granted are reserved. No rights to commercial use,
+organizational use or evaluation, hosted services, redistribution, derivative
+publication, sublicensing, relicensing, patents, or project branding arise by
+implication, estoppel, or otherwise. Any additional authorization requires a
+separate prior written agreement from each applicable rights holder whose
+permission is legally necessary.
+
+9. Experimental status; user responsibilities
+
+THE SOFTWARE IS EXPERIMENTAL AND NOT APPROVED FOR PRODUCTION, COMMERCIAL,
+SHARED, OR ORGANIZATIONAL USE. It may transfer, change, or delete remote files,
+execute commands, manage credentials, stop services, or affect processes.
+Defects, security vulnerabilities, unintended data changes, service outages,
+or credential exposure can occur. Users must evaluate the risks, maintain
+independent backups, operate only authorized isolated test systems, and
+review high-impact actions before carrying them out.
+
+10. No warranty; limitation of liability
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE SOFTWARE IS PROVIDED
+"AS IS" AND "AS AVAILABLE", WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE, TITLE, SECURITY, AND NON-INFRINGEMENT. TO THE MAXIMUM EXTENT
+PERMITTED BY LAW, THE APPLICABLE RIGHTS HOLDER(S) AND CONTRIBUTORS SHALL NOT
+BE LIABLE FOR ANY CLAIM, LOSS, DAMAGE, COST, OR OTHER LIABILITY ARISING
+FROM OR RELATED TO THE SOFTWARE OR ITS USE, WHETHER IN CONTRACT, TORT, OR
+OTHERWISE. NOTHING IN THIS LICENSE EXCLUDES OR LIMITS LIABILITY WHERE THAT
+IS PROHIBITED BY APPLICABLE LAW.
+
+11. Termination
+
+Permission under this License terminates automatically upon a material
+breach. Upon termination, you must stop exercising permissions under this
+License and delete copies retained solely pursuant to this License, except
+where retention is otherwise legally required or permitted by applicable
+third-party, prior, or separate licenses.
+
+12. Severability and non-waiver
+
+If any provision is unenforceable under applicable law, the remaining
+provisions remain in effect to the extent legally permissible. Failure to
+enforce any provision in one instance does not waive enforcement in another.
+
+13. Separate permission
+
+Any use or distribution beyond this License requires the applicable rights
+holder(s)' prior written authorization. This License creates no obligation
+for any rights holder to provide support, an additional license, or a future
+release.

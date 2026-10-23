@@ -1,0 +1,23 @@
+node_modules/
+.pnpm-store/
+*.tgz
+.env
+.env.*
+!.env.example
+*.log
+coverage/
+.DS_Store
+Thumbs.db
+.dsh/
+.plugin-data/
+credentials.json
+connections.json
+audit.jsonl
+session-anchors/
+*.pem
+*.key
+.repro/
+.inspect/
+
+# Generated compliance reports; commit the reviewed pnpm-lock.yaml separately
+license-reports/
