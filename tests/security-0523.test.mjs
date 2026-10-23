@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
-import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,rmSync,existsSync} from 'node:fs';
+import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,rmSync,existsSync,realpathSync} from 'node:fs';
 import {join} from 'node:path';
 import {tmpdir} from 'node:os';
 const require=createRequire(import.meta.url);
@@ -16,7 +16,8 @@ const {preview}=require('../lib/cleanup.cjs');
 function setup(t){
   const root=mkdtempSync(join(tmpdir(),'rw-bound-0523-'));
   t.after(()=>rmSync(root,{recursive:true,force:true}));
-  const local=join(root,'project');mkdirSync(local);
+  const localPath=join(root,'project');mkdirSync(localPath);
+  const local=realpathSync(localPath);
   const counts={test:0,read:0,questions:0};
   const remote={test:async()=>{counts.test++;},read:async id=>{counts.read++;return {profile:id}}};
   const service=createService({},{filename:join(root,'private','connections.json'),remote});
