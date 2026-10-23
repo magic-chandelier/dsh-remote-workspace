@@ -1,10 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, cpSync, mkdtempSync, mkdirSync, writeFileSync, rmSync, readdirSync } from 'node:fs';
+import { readFileSync, cpSync, mkdtempSync, mkdirSync, writeFileSync, rmSync, readdirSync, chmodSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { packArchive, archiveFilename } from '../scripts/package-archive.mjs';
 const root = new URL('../', import.meta.url);
 const read = p => readFileSync(new URL(p, root), 'utf8');
 
@@ -95,6 +96,52 @@ test('pnpm installed tree fails when versions do not match committed lockfile',(
   assert.notEqual(result.status,0);
   assert.match(result.stderr,/Installed version not found in pnpm-lock/);
 }));
+
+test('packArchive supports pnpm that lacks --pack-destination', { skip: process.platform === 'win32' }, () => {
+  const dir = mkdtempSync(join(tmpdir(), 'dsh-pack-compat-'));
+  try {
+    const project = join(dir, 'project');
+    const destination = join(dir, 'out');
+    const bin = join(dir, 'bin');
+    mkdirSync(project);
+    mkdirSync(destination);
+    mkdirSync(bin);
+    writeFileSync(join(project, 'package.json'), JSON.stringify({
+      name: '@dsh/test-pack',
+      version: '1.0.0',
+      description: 'fixture',
+      files: ['README.md'],
+    }));
+    writeFileSync(join(project, 'README.md'), 'fixture\n');
+    const shim = join(bin, 'pnpm');
+    writeFileSync(shim, `#!/bin/sh
+node "$0".cjs "$@"
+`);
+    writeFileSync(`${shim}.cjs`, `
+const { spawnSync } = require('node:child_process');
+const args = process.argv.slice(2);
+if (args.includes('--pack-destination')) {
+  console.error('ERROR Unknown option: pack-destination');
+  process.exit(1);
+}
+const npmArgs = args[0] === 'pack' ? args.slice(1) : args;
+const result = spawnSync('npm', ['pack', ...npmArgs, '--silent'], { stdio: 'inherit', shell: process.platform === 'win32' });
+process.exit(result.status ?? 1);
+`);
+    chmodSync(shim, 0o755);
+    const previousPath = process.env.PATH;
+    process.env.PATH = `${bin}:${previousPath}`;
+    try {
+      const archive = packArchive(project, destination);
+      assert.equal(archive, join(destination, archiveFilename(project)));
+      assert.equal(existsSync(archive), true);
+    } finally {
+      process.env.PATH = previousPath;
+    }
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
 
 test('all operational documentation resolves to one Wiki, without stale legacy references', () => {
   assert.deepEqual(readdirSync(new URL('docs/',root)),['WIKI.zh-CN.md']);

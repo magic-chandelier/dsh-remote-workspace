@@ -1,4 +1,4 @@
-import { mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
+import { mkdtempSync, readFileSync, readdirSync, renameSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -12,11 +12,11 @@ export function archiveFilename(dir) {
 export function packArchive(dir, destination) {
   const expected = archiveFilename(dir);
   const candidates = [
-    ['pnpm', ['pack', '--pack-destination', destination, '--ignore-scripts']],
-    ['npm', ['pack', '--pack-destination', destination, '--ignore-scripts', '--silent']],
+    ['pnpm', ['pack', '--ignore-scripts'], true],
+    ['npm', ['pack', '--pack-destination', destination, '--ignore-scripts', '--silent'], false],
   ];
   let last = '';
-  for (const [command, args] of candidates) {
+  for (const [command, args, archiveInCwd] of candidates) {
     const result = spawnSync(command, args, {cwd:dir, encoding:'utf8',
       shell:process.platform==='win32',
       env:{...process.env,npm_config_ignore_scripts:'true'}});
@@ -29,6 +29,8 @@ export function packArchive(dir, destination) {
       // Do not silently use another package manager if the installed one has failed.
       throw new Error(last);
     }
+    if (archiveInCwd && readdirSync(dir).includes(expected))
+      renameSync(join(dir, expected), join(destination, expected));
     const archive = join(destination, expected);
     if (!readdirSync(destination).includes(expected))
       throw new Error(`${command} succeeded but ${expected} was not created`);
