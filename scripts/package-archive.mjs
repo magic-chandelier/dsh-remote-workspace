@@ -1,4 +1,4 @@
-import { mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
+import { copyFileSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -12,7 +12,7 @@ export function archiveFilename(dir) {
 export function packArchive(dir, destination) {
   const expected = archiveFilename(dir);
   const candidates = [
-    ['pnpm', ['pack', '--pack-destination', destination, '--ignore-scripts']],
+    ['pnpm', ['pack']],
     ['npm', ['pack', '--pack-destination', destination, '--ignore-scripts', '--silent']],
   ];
   let last = '';
@@ -30,6 +30,10 @@ export function packArchive(dir, destination) {
       throw new Error(last);
     }
     const archive = join(destination, expected);
+    if (command === 'pnpm') {
+      copyFileSync(join(dir, expected), archive);
+      rmSync(join(dir, expected), {force:true});
+    }
     if (!readdirSync(destination).includes(expected))
       throw new Error(`${command} succeeded but ${expected} was not created`);
     return archive;

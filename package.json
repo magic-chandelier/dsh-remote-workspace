@@ -43,8 +43,8 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "check": "node scripts/check.mjs",
-    "test": "node --test tests/*.test.mjs",
-    "verify": "node scripts/build.mjs && node scripts/check.mjs && node --test tests/*.test.mjs && node scripts/verify-package.mjs && node scripts/check-licenses.mjs --source",
+    "test": "node --test --test-concurrency=1",
+    "verify": "node scripts/build.mjs && node scripts/check.mjs && node --test --test-concurrency=1 && node scripts/verify-package.mjs && node scripts/check-licenses.mjs --source",
     "pack": "node scripts/pack-safe.mjs",
     "pack:ui-experimental": "node scripts/pack-ui-candidate.mjs",
     "license:source": "node scripts/check-licenses.mjs --source",

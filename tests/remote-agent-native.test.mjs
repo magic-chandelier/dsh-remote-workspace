@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
-import { mkdtempSync, writeFileSync, rmSync, readFileSync } from 'node:fs';
+import { mkdtempSync, writeFileSync, rmSync, readFileSync, readdirSync, chmodSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { EventEmitter } from 'node:events';
@@ -17,7 +17,15 @@ function fixture(fn, readOnly = false) {
   const store = new Store(db);
   store.upsert({id:'prod',host:'ssh.example.test',port:22,username:'deploy',protocol:'ssh',remoteRoot:'/srv/projects',privateKeyPath:key,hostTrustMode:'pinned',hostKeySha256:'a'.repeat(64),readOnly});
   store.setWorkspace('prod', '/srv/projects/app one');
-  return Promise.resolve().then(() => fn({ dir, key, store })).finally(() => rmSync(dir,{recursive:true,force:true}));
+  return Promise.resolve().then(() => fn({ dir, key, store })).finally(() => {
+    for (const name of ['mounts', 'password-mounts']) {
+      const root = join(dir, name);
+      if (!existsSync(root)) continue;
+      chmodSync(root, 0o700);
+      for (const child of readdirSync(root)) chmodSync(join(root, child), 0o700);
+    }
+    rmSync(dir,{recursive:true,force:true});
+  });
 }
 test('remote_shell requires genuine user-question approval, not a model-provided confirmation token', async () => fixture(async ({store}) => {
   const target = targetFor(store, 'prod', 'systemctl restart nginx', 5000);
