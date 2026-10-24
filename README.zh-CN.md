@@ -33,5 +33,3 @@ pnpm run pack:ui-experimental
 
 - [综合 Wiki：安装、授权、文件传输、监控、生命周期和发布](docs/WIKI.zh-CN.md)
 - [安全政策](SECURITY.md) · [英文介绍](README.md)
-
-CI 必须先提交从软件包仓库解析得到的 `pnpm-lock.yaml`，然后使用 `pnpm install --frozen-lockfile --ignore-scripts` 安装。**生成锁文件或冻结安装通过，不等于完成完整的间接依赖许可证审计**；仍须执行 `pnpm run license:installed`，人工审核其报告后才能宣称完成许可证审阅。真实 Windows Desktop 验收也尚未完成。
