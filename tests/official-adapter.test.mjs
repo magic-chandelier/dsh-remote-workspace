@@ -98,12 +98,14 @@ test('client artifact uses official lazy-CJS loader and slots, without forbidden
   assert.equal(rendered.props.className,'dr3-root');
   assert(!text.includes('tapIndex('));
 });
-test('safe bundle has Host patch and cannot enter Client boot graph',()=>{
+test('UI manifest keeps Host patch and exposes Web client boot metadata',()=>{
   const manifest=JSON.parse(readFileSync(join(root,'package.json'),'utf8'));
   assert.equal(manifest.dsh.bundle.patch,'./cordis.patch.yml');
-  assert.equal(manifest.dsh.client, undefined);
-  assert.equal(manifest.exports['./client'], undefined);
+  assert.deepEqual(manifest.dsh.client, { platform: 'web' });
+  assert.equal(manifest.exports['./client'], './lib/client.js');
+  assert(manifest.files.includes('lib/client.js'));
   assert(existsSync(join(root,'lib/index.js')));
+  assert(existsSync(join(root,'lib/client.js')));
   assert(existsSync(join(root,'cordis.patch.yml')));
 });
 test('ESM Host entry imports and registers 23 defineTool tools through Cordis-style context', async()=>{

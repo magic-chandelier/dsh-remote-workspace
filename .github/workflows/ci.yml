@@ -1,7 +1,7 @@
 name: CI
 on:
   push:
-    branches: [main]
+    branches: [main, main-UI]
   pull_request:
   workflow_dispatch:
 permissions:
@@ -26,6 +26,7 @@ jobs:
       - name: Install exactly the committed dependency tree
         run: pnpm install --frozen-lockfile --ignore-scripts
       - run: pnpm run verify
-      - name: Verify experimental UI archive
-        if: matrix.node == 22
-        run: pnpm run pack:ui-experimental
+      - name: Verify UI and safe package targets
+        run: |
+          pnpm run pack
+          pnpm run pack:ui-experimental
