@@ -65,10 +65,11 @@ test('limited JSON reader parses small requests and rejects invalid JSON',async(
   assert.deepEqual(await readLimitedJson(send('{"hello":123}')),{hello:123});
   await assert.rejects(readLimitedJson(send('{bad')),SyntaxError);
 });
-test('safe manifest has no client boot registration',()=>{
+test('main-UI manifest declares client boot registration and Host patch metadata',()=>{
   const manifest=require('../package.json');
-  assert.equal(manifest.dsh.client,undefined);
-  assert.equal(manifest.exports['./client'],undefined);
+  assert.deepEqual(manifest.dsh.client,{platform:'web'});
+  assert.equal(manifest.exports['./client'],'./lib/client.js');
+  assert(manifest.files.includes('lib/client.js'));
   assert.equal(manifest.dsh.bundle.patch,'./cordis.patch.yml');
   assert.match(manifest.version,/^0\.5\.26-safe\.1$/);
 });
