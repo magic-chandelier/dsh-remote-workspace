@@ -32,5 +32,3 @@ pnpm run pack:ui-experimental
 ```
 
 [Comprehensive Wiki (Chinese)](docs/WIKI.zh-CN.md) · [Security policy](SECURITY.md) · [中文版介绍](README.zh-CN.md)
-
-Commit the registry-resolved `pnpm-lock.yaml` before CI runs `pnpm install --frozen-lockfile --ignore-scripts`. Lockfile generation and a frozen install do **not** constitute a completed transitive-dependency license audit: `pnpm run license:installed` must pass on the installed dependency tree, and its report must be reviewed before a release is marked license-reviewed. Real Windows Desktop acceptance is still pending.
