@@ -25,9 +25,9 @@ try {
   const base = manifest.version.split('-')[0];
   manifest.version = `${base}-ui.1`;
   manifest.description += ' — EXPERIMENTAL Web UI';
-  manifest.exports['./client'] = './lib/client.js';
-  manifest.dsh.client = { platform: 'web' };
-  manifest.files.push('lib/client.js');
+  manifest.exports = { ...(manifest.exports || {}), './client': './lib/client.js' };
+  manifest.dsh = { ...(manifest.dsh || {}), client: { platform: 'web' } };
+  manifest.files = Array.from(new Set([...(manifest.files || []), 'lib/client.js']));
   writeFileSync(filename, JSON.stringify(manifest, null, 2) + '\n');
 
   const packed = packArchive(work, root);

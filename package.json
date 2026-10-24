@@ -6,10 +6,12 @@
   "main": "./lib/index.js",
   "exports": {
     ".": "./lib/index.js",
+    "./client": "./lib/client.js",
     "./package.json": "./package.json"
   },
   "files": [
     "lib/index.js",
+    "lib/client.js",
     "lib/*.cjs",
     "cordis.patch.yml",
     "README.md",
@@ -22,6 +24,9 @@
     "docs/WIKI.zh-CN.md"
   ],
   "dsh": {
+    "client": {
+      "platform": "web"
+    },
     "bundle": {
       "patch": "./cordis.patch.yml"
     }
